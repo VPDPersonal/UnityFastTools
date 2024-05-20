@@ -1,6 +1,10 @@
 # Unity Fast Tools
 **Unity Fast Tools** is a set of tools that minimizes the writing of routine code in Unity using source code generators.
 
+This set contains:
+* [Source Generators](https://github.com/VPDPersonal/UnityFastToolsGenerators)
+* [Code Analyzers](https://github.com/VPDPersonal/UnityFastToolsAnalyzers)
+
 **Note for version 0.1:** this version lacks several necessary code analyzers, and there may also be unforeseen use cases. 
 I will be glad to receive your feedback to improve the performance of the set and expand its capabilities.
 
