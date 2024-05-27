@@ -2,6 +2,7 @@ fileFormatVersion: 2
 guid: bff9e46df8921481a8c9063de544d7bf
 labels:
 - RoslynAnalyzer
+- RunOnlyOnAssembliesWithReference
 PluginImporter:
   externalObjects: {}
   serializedVersion: 3
@@ -10,8 +11,8 @@ PluginImporter:
   defineConstraints: []
   isPreloaded: 0
   isOverridable: 0
-  isExplicitlyReferenced: 0
-  validateReferences: 1
+  isExplicitlyReferenced: 1
+  validateReferences: 0
   platformData:
     Android:
       enabled: 0

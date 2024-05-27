@@ -1,40 +1,41 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityFastTools.UnityEvents;
 
 // ReSharper disable once CheckNamespace
 namespace UnityFastTools.Samples
 {
     public partial class UnityHandlerSample : MonoBehaviour
     {
-        [UnityHandler(UnityHandlerType.Click, nameof(OnClicked1))]
+        [UnityHandler(UnityEventName.Click, nameof(OnClicked1))]
         [SerializeField] private Button _singleButton1;
         
         // This option can lead to errors in the generated code if you make an error in the parameters
         [UnityHandler("onClick", "OnClicked2")]
         [SerializeField] private Button _singleButton2;
         
-        [UnityHandler(UnityHandlerType.Click, nameof(OnClicked2))]
-        [UnityHandler(UnityHandlerType.Click, nameof(OnClicked3))]
+        [UnityHandler(UnityEventName.Click, nameof(OnClicked2))]
+        [UnityHandler(UnityEventName.Click, nameof(OnClicked3))]
         [SerializeField] private Button _singleButton3;
         
         [field: SerializeField]
-        [UnityHandler(UnityHandlerType.Click, nameof(OnClickedProperty1))]
+        [UnityHandler(UnityEventName.Click, nameof(OnClickedProperty1))]
         public Button PropertyButton1 { get; private set; }
         
-        [UnityHandler(UnityHandlerType.Click, nameof(OnClickedProperty2))]
+        [UnityHandler(UnityEventName.Click, nameof(OnClickedProperty2))]
         private Button PropertyButton2 { get; set; }
         
-        [UnityHandler(UnityHandlerType.Click, nameof(OnClickedArrayButtons))]
+        [UnityHandler(UnityEventName.Click, nameof(OnClickedArrayButtons))]
         [SerializeField] private Button[] _arrayButtons1;
         
-        private void OnEnable()
-        {
-            PropertyButton2 = PropertyButton1;
-            SubsribesUnityHandler();
-        }
-        
-        private void OnDisable() =>
-            UnsubsribesUnityHandler();
+        // private void OnEnable()
+        // {
+        //     PropertyButton2 = PropertyButton1;
+        //     SubsribesUnityHandler();
+        // }
+        //
+        // private void OnDisable() =>
+        //     UnsubsribesUnityHandler();
         
         private void OnClicked1() =>
             Debug.Log(nameof(OnClicked1));

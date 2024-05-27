@@ -1,37 +1,39 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityFastTools.GetComponents;
+using UnityFastTools.UnityEvents;
 
 // ReSharper disable once CheckNamespace
 namespace UnityFastTools.Samples
 {
     public partial class GetComponentPropertySample : MonoBehaviour
     {
-        [UnityHandler(UnityHandlerType.Click, nameof(InitializeProperties))]
+        [UnityHandler(nameof(InitializeProperties))]
         [SerializeField] private Button _initializeButton;
         
         [GetComponentProperty] private Transform _privateTransform;
-        [GetComponentProperty(GetComponentType.Child)] private Transform _privateTransformChild;
-        [GetComponentProperty(GetComponentType.Parent)] private Transform _privateTransformParent;
+        [GetComponentProperty(WhereGet.Child)] private Transform _privateTransformChild;
+        [GetComponentProperty(WhereGet.Parent)] private Transform _privateTransformParent;
         
-        [GetComponentProperty(PropertyAccess.Public)] private Transform _publicTransform;
-        [GetComponentProperty(PropertyAccess.Public, GetComponentType.Child)] private Transform _publicTransformChild;
-        [GetComponentProperty(PropertyAccess.Public, GetComponentType.Parent)] private Transform _publicTransformParent;
+        [GetComponentProperty(Access.Public)] private Transform _publicTransform;
+        [GetComponentProperty(Access.Public, WhereGet.Child)] private Transform _publicTransformChild;
+        [GetComponentProperty(Access.Public, WhereGet.Parent)] private Transform _publicTransformParent;
         
-        [GetComponentProperty(PropertyAccess.Protected)] private Transform _protectedTransform;
-        [GetComponentProperty(PropertyAccess.Protected, GetComponentType.Child)] private Transform _protectedTransformChild;
-        [GetComponentProperty(PropertyAccess.Protected, GetComponentType.Parent)] private Transform _protectedTransformParent;
+        [GetComponentProperty(Access.Protected)] private Transform _protectedTransform;
+        [GetComponentProperty(Access.Protected, WhereGet.Child)] private Transform _protectedTransformChild;
+        [GetComponentProperty(Access.Protected, WhereGet.Parent)] private Transform _protectedTransformParent;
         
         [GetComponentProperty] private Transform[] _privateTransforms;
-        [GetComponentProperty(GetComponentType.Child)] private Transform[] _privateTransformsChild;
-        [GetComponentProperty(GetComponentType.Parent)] private Transform[] _privateTransformsParent;
+        [GetComponentProperty(WhereGet.Child)] private Transform[] _privateTransformsChild;
+        [GetComponentProperty(WhereGet.Parent)] private Transform[] _privateTransformsParent;
         
-        [GetComponentProperty(PropertyAccess.Public)] private Transform[] _publicTransforms;
-        [GetComponentProperty(PropertyAccess.Public, GetComponentType.Child)] private Transform[] _publicTransformsChild;
-        [GetComponentProperty(PropertyAccess.Public, GetComponentType.Parent)] private Transform[] _publicTransformsParent;
+        [GetComponentProperty(Access.Public)] private Transform[] _publicTransforms;
+        [GetComponentProperty(Access.Public, WhereGet.Child)] private Transform[] _publicTransformsChild;
+        [GetComponentProperty(Access.Public, WhereGet.Parent)] private Transform[] _publicTransformsParent;
         
-        [GetComponentProperty(PropertyAccess.Protected)] private Transform[] _protectedTransforms;
-        [GetComponentProperty(PropertyAccess.Protected, GetComponentType.Child)] private Transform[] _protectedTransformsChild;
-        [GetComponentProperty(PropertyAccess.Protected, GetComponentType.Parent)] private Transform[] _protectedTransformsParent;
+        [GetComponentProperty(Access.Protected)] private Transform[] _protectedTransforms;
+        [GetComponentProperty(Access.Protected, WhereGet.Child)] private Transform[] _protectedTransformsChild;
+        [GetComponentProperty(Access.Protected, WhereGet.Parent)] private Transform[] _protectedTransformsParent;
         
         private void OnEnable() =>
             SubsribesUnityHandler();
