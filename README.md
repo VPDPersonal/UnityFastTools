@@ -1,31 +1,35 @@
 # Unity Fast Tools
-**Unity Fast Tools** is a set of tools that minimizes the writing of routine code in Unity using source code generators.
+**Unity Fast Tools** is a set of tools designed to minimize routine code writing in Unity using source code generators.
 
-This set contains:
+This set includes:
 * [Source Generators](https://github.com/VPDPersonal/UnityFastToolsGenerators)
 * [Code Analyzers](https://github.com/VPDPersonal/UnityFastToolsAnalyzers)
 
-**Note for version 0.1:** this version lacks several necessary code analyzers, and there may also be unforeseen use cases. 
-I will be glad to receive your feedback to improve the performance of the set and expand its capabilities.
+**Note for version 0.1.5:** This is a version with a stable source code generator and a full set of code analyzers.
+If you think something can be improved, I will be waiting for your feedback.
 
 ## Unity Handler
 **UnityHandlerAttribute** is an attribute designed to automatically add subscriptions and unsubscribes to a UnityEvent.
 
 ```csharp
-// The class must have the 'partial' modifier, otherwise there will be an error.
+// The class must have the 'partial' modifier, otherwise an error will occur UTF0002
 public partial class SomeMono : MonoBehaviour
 {
-    // Preferred usage.
-    [UnityHandler(UnityHandlerType.Click, nameof(OnClicked))]
+    // This approach works only for: Button, Toggle, Slider, RectScroll.
+    [UnityHandler(nameof(OnClicked))]
     [SerializeField] private Button _button1;
     
-    // This method is more error prone. If you have a typo in the parameters
+    // This approach works for those types who have onClick or onValueChanged event
+    [UnityHandler(UnityEventName.Click, nameof(OnClicked))]
+    [SerializeField] private Button _button2;
+    
+    // This method is more error-prone. If you have a typo in the parameters,
     // there will be a compilation error in the generated code.
     [UnityHandler("onClick", "OnClicked"]
     [SerializeField] private Button _button2;
     
-    // There is support for arrays.
-    [UnityHandler(UnityHandlerType.Click, nameof(OnClicked))]
+    // Arrays are supported.
+    [UnityHandler(nameof(OnClicked))]
     [SerializeField] private Button _buttons;
 
     // You must call the the 'SubscribeUnityHandler' method
@@ -40,26 +44,26 @@ public partial class SomeMono : MonoBehaviour
 
     private void OnClicked() 
     {
-        // To do something
+        // Do something
     }
 }
 ```
 
-### UnityHandlerType
-**UnityHandlerType** is a static class with constants that contain the main names of events that Unity uses:
+### UnityEventName
+**UnityEventName** enum names of UnityEvents
 * Click - onClick
 * ValueChanged - onValueChanged
 
 ### Restrictions
-There is currently no error analyzer in the attribute parameters and an error may occur in the generated code.
+Incorrect parameters in the attribute will result in errors in the generated code.
 
 **UnityHandlerAttribute** does not support:
-* Properties without the 'get' modifier
+* Properties without the 'get' accessor
 * Type format: [field: UnityHandler(..., ...)]
-* Collections. Only array supported
+* Collections other than arrays
 
 ## Get Component
-**GetComponentAttribute** is an attribute designed to automatically GetComponent for fields and properties.
+**GetComponentAttribute** is an attribute designed to automatically call GetComponent for fields and properties.
 
 ```csharp
 public partial class SomeMono : MonoBehaviour
@@ -78,41 +82,40 @@ public partial class SomeMono : MonoBehaviour
     
     // You must call 'GetUnityComponents' to force all marked fields to 'GetComponent'.
     private void Awake() =>
-        GetUnityComponents();
+        GetUnityComponents(this);
 }
 ```
-### GetComponentType
-**GetComponentType** is an enum of the types of GetComponent methods
+### WhereGet
+**WhereGet** is an enum representing the types of GetComponent methods:
 * Self - GetComponent
 * Child - GetComponentInChildren
 * Parent - GetComponentInParent
 
 ### Restrictions
 **GetComponentAttribute** does not support:
-* Properties without the 'set' modifier
+* Properties without the 'set' accessor
 * Type format: [field: GetComponentAttribute]
-* Collections. Only array supported
+* Collections other than arrays
 
 ## Get Component Property
-**GetComponentAttribute** is an attribute for fields that automatically creates a property 
-that initializes the field via GetComponent
+**GetComponentAttribute** is an attribute for fields that automatically creates a property initializing the field via GetComponent.
 
 ```csharp
 public partial class SomeMono : MonoBehaviour
 {
     // Creates a property:
-    // public CachedText => _text ? _text : (_text = GetComponent<TMP_Text>())
+    // public TMP_Text CachedText => _text ? _text : (_text = GetComponent<TMP_Text>())
     [GetComponentProperty] private TMP_Text _text;
     
     // Creates a property:
-    // public CachedImage => _image ? _image : (_image = GetComponentInChildren<Image>())
+    // public Image CachedImage => _image ? _image : (_image = GetComponentInChildren<Image>())
     [GetComponentProperty(GetComponentType.Child)] private Image _image;
     
     // Creates a property:
-    // public CachedTransform => _transform ? _transform : (_transform = GetComponent<Transform>())
+    // public Transform CachedTransform => _transform ? _transform : (_transform = GetComponent<Transform>())
     [GetComponentProperty(PropertyAccess.Public) private Transform _transform;
     
-    // There is support for arrays. Creates a property: 
+    // Arrays are supported. Creates a property:
     // protected Image[] CachedImages => _images != null && _images.Length > 0 ? _images : (_images = GetComponentsInParent<Image());
     [GetComponentProperty(PropertyAccess.Protected, GetComponentType.Parent) private Image[] _images;
     
@@ -127,14 +130,14 @@ public partial class SomeMono : MonoBehaviour
     }
 }
 ```
-### GetComponentType
-**GetComponentType** is an enum of the types of GetComponent methods
+### WhereGet
+**WhereGet** is an enum representing the types of GetComponent methods:
 * Self - GetComponent
 * Child - GetComponentInChildren
 * Parent - GetComponentInParent
 
-### PropertyAccess
-**PropertyAccess** is an enum of the types of GetComponent methods
+### Access
+**Access** is an enum representing the access levels for the properties:
 * Private - private
 * Protected - protected
 * Public - public
@@ -142,8 +145,15 @@ public partial class SomeMono : MonoBehaviour
 ### Restrictions
 **GetComponentAttribute** does not support:
 * Properties
-* Collections. Only array supported
+* Collections other than arrays
 
-## Road Map
-* New analyzers to avoid errors.
-* Config for setting names, methods and properties.
+## Roadmap
+* New analyzers to avoid errors
+* Configuration for setting names, methods, and properties
+* Add sender to UnityHandler to allow the object to pass itself as a parameter
+* Add adapters for any entity with UnityEvent
+
+## For consideration:
+* Attributes for rendering Inspector and EditorWindow
+* Adapter for Odin Inspector, Tri Inspector and others for smooth switching between them
+* Serialization. Dictionary, tuple

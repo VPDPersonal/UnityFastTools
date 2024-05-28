@@ -2,15 +2,15 @@
 namespace UnityFastTools
 {
     /// <summary>
-    /// Property access modifiers.
-    /// Changes may prevent correct code generation.
-    /// If you want to edit Access you will also need to change UnityFastToolsGenerators.
+    /// Specifies property access modifiers.
+    /// Modifications might prevent correct code generation.
+    /// If you want to modify Access, you will also need to modify UnityFastToolsGenerators.
     /// </summary>
     public enum Access
     {
         Private,
         Protected,
         Public,
-        // TODO Iternal
+        // TODO: Implement Internal access modifier
     }
 }

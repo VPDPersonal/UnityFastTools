@@ -5,6 +5,7 @@ using UnityFastTools.GetComponents;
 // ReSharper disable once CheckNamespace
 namespace UnityFastTools.Samples
 {
+    // This class must be partial.
     public partial class GetComponentSample : MonoBehaviour
     {
         [GetComponent] private Image _selfImage;

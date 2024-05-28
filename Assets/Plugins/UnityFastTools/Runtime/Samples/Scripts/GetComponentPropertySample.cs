@@ -6,6 +6,7 @@ using UnityFastTools.UnityEvents;
 // ReSharper disable once CheckNamespace
 namespace UnityFastTools.Samples
 {
+    // This class must be partial.
     public partial class GetComponentPropertySample : MonoBehaviour
     {
         [UnityHandler(nameof(InitializeProperties))]
@@ -43,7 +44,7 @@ namespace UnityFastTools.Samples
         
         private void InitializeProperties()
         {
-            // UFT0001: Field '_privateTransform' with [GetComponentProperty] should not be used outside its declaration. Use cached property instead.
+            // UFT0001: Field '_privateTransform' with [GetComponentProperty] should not be used outside its declaration. Use the cached property instead.
             // Debug.Log(_privateTransform.gameObject.name);
             
             Debug.Log($"{CachedPrivateTransform}: " + CachedPrivateTransform.gameObject.name);

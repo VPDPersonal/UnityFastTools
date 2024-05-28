@@ -1,42 +1,45 @@
 # Unity Fast Tools
 **Unity Fast Tools** это набор инструментов, который минимизирует написание рутинного кода в Unity с помощью
-генераторов исходного кода.
+генераторов исходного кода и анализаторов.
 
-Данный набор содержит в себе:
+Этот набор включает:
 * [Генераторы кода](https://github.com/VPDPersonal/UnityFastToolsGenerators)
 * [Анализаторы кода](https://github.com/VPDPersonal/UnityFastToolsAnalyzers)
 
-**Примечание к версии 0.1:** в данной версии отсутствуют несколько необходимых анализаторов кода, для повышения работоспособности,
-а так же могут присутствовать не предусмотренные сценарии использования.
-Буду рад вашей обратной связи для повышению работоспособности набора и расширения его возможностей.
+**Примечание к версии 0.1:** Это версия со стабильным генератором исходного кода и полным набором анализаторов кода.
+Если вы считаете, что что-то можно улучшить, я буду ждать вашей обратной связи.
 
 ## Unity Handler
-**UnityHandlerAttribute** это аттрибут предназначенный для автоматического добавления подписок и отписок на UnityEvent.
+**UnityHandlerAttribute** - это атрибут, предназначенный для автоматической подписки и отписки от событий UnityEvent.
 
 ```csharp
-// Класс должен иметь модификатор 'partial', иначе будет ошибка.
+// Класс должен иметь модификатор 'partial', в противном случае возникнет ошибка UTF0002
 public partial class SomeMono : MonoBehaviour
 {
-    // Предпочтительный способ использования.
-    [UnityHandler(UnityHandlerType.Click, nameof(OnClicked))]
+    // Этот подход работает только для: Button, Toggle, Slider, RectScroll.
+    [UnityHandler(nameof(OnClicked))]
     [SerializeField] private Button _button1;
     
-    // Данный способ более подвержен к ошибке. Если у вас опечатка в параметрах,
-    // то будет ошибка компиляции в сгенерированном коде.
+    // Этот подход работает для тех типов, у которых есть событие onClick или onValueChanged.
+    [UnityHandler(UnityEventName.Click, nameof(OnClicked))]
+    [SerializeField] private Button _button2;
+    
+    // Этот способ более подвержен ошибкам. Если вы допустите опечатку в параметрах,
+    // возникнет ошибка компиляции в сгенерированном коде.
     [UnityHandler("onClick", "OnClicked"]
     [SerializeField] private Button _button2;
     
-    // Есть поддержка массивов.
+    // Поддерживаются массивы.
     [UnityHandler(UnityHandlerType.Click, nameof(OnClicked))]
     [SerializeField] private Button _buttons;
 
-    // Необходимо вызвать метод SubscribeUnityHandler,
-    // чтобы подписаться на все необходимые события.
+    // Вы должны вызвать метод 'SubscribeUnityHandler'
+    // для подписки на все необходимые события.
     private void OnEnable() =>
         SubscribeUnityHandler();
        
-    // Необходимо вызвать метод UnsubscribeUnityHandler,
-    // чтобы отписаться от все необходимых событий.
+    // Вы должны вызвать метод 'UnsubscribeUnityHandler'
+    // для отписки от всех необходимых событий.
     private void OnDisable() =>
         UnsubscribeUnityHandler();
 
@@ -47,22 +50,21 @@ public partial class SomeMono : MonoBehaviour
 }
 ```
 
-### UnityHandlerType
-**UnityHandlerType** это статический класс с константами, которые содержат основные названия событий, которые используют Unity:
+### UnityEventName
+**UnityEventName** перечисления имен UnityEvents
 * Click - onClick
 * ValueChanged - onValueChanged
 
 ### Ограничения
-В данный момент отсутствует анализатор ошибок в параметрах атрибута и может возникнуть ошибка в сгенерированном коде.
-Будьте внимательны!!!
+Неправильные параметры атрибута приведут к ошибкам в сгенерированном коде.
 
 **UnityHandlerAttribute** не поддерживает:
-* Свойства без модификатора get
+* Свойства без модификатора доступа 'get'
 * Формат типа: [field: UnityHandler(..., ...)]
-* Коллекции. Поддерживается только массив
+* Коллекции, отличные от массивов
 
 ## Get Component
-**GetComponentAttribute** это аттрибут предназначенный для автоматического GetComponent для полей и свойств.
+**GetComponentAttribute** это атрибут, предназначенный для автоматического вызова метода GetComponent для полей и свойств.
 
 ```csharp
 public partial class SomeMono : MonoBehaviour
@@ -84,35 +86,35 @@ public partial class SomeMono : MonoBehaviour
         GetUnityComponents();
 }
 ```
-### GetComponentType
-**GetComponentType** это перечисление типов методов GetComponent
+### WhereGet
+**WhereGet** это перечисление типов методов GetComponent
 * Self - GetComponent
 * Child - GetComponentInChildren
 * Parent - GetComponentInParent
 
 ### Ограничения
 **GetComponentAttribute** не поддерживает:
-* Свойства без модификатора set
+* Свойства без модификатора доступа 'set'
 * Формат типа: [field: GetComponentAttribute]
-* Коллекции. Поддерживается только массив
+* Коллекции, отличные от массивов
 
 ## Get Component Property
 **GetComponentAttribute** это атрибут для полей, который автоматический создает свойство, 
-которое инициализирует поле через GetComponent
+которое инициализирует поле с помощью GetComponent
 
 ```csharp
 public partial class SomeMono : MonoBehaviour
 {
     // Создает свойство:
-    // public CachedText => _text ? _text : (_text = GetComponent<TMP_Text>())
+    // public TMP_Text CachedText => _text ? _text : (_text = GetComponent<TMP_Text>())
     [GetComponentProperty] private TMP_Text _text;
     
     // Создает свойство:
-    // public CachedImage => _image ? _image : (_image = GetComponentInChildren<Image>())
+    // public Image CachedImage => _image ? _image : (_image = GetComponentInChildren<Image>())
     [GetComponentProperty(GetComponentType.Child)] private Image _image;
     
     // Создает свойство:
-    // public CachedTransform => _transform ? _transform : (_transform = GetComponent<Transform>())
+    // public Transform CachedTransform => _transform ? _transform : (_transform = GetComponent<Transform>())
     [GetComponentProperty(PropertyAccess.Public) private Transform _transform;
     
     // Есть поддержка массива. Создает свойство: 
@@ -130,14 +132,14 @@ public partial class SomeMono : MonoBehaviour
     }
 }
 ```
-### GetComponentType
-**GetComponentType** это перечисление типов методов GetComponent
+### WhereGet
+**WhereGet** это перечисление типов методов GetComponent
 * Self - GetComponent
 * Child - GetComponentInChildren
 * Parent - GetComponentInParent
 
-### PropertyAccess
-**PropertyAccess** это перечисление модификаторов доступа к свойству
+### Access
+**Access** это перечисление модификаторов доступа к свойству
 * Private - private
 * Protected - protected
 * Public - public
@@ -145,8 +147,15 @@ public partial class SomeMono : MonoBehaviour
 ### Ограничения
 **GetComponentAttribute** не поддерживает:
 * Свойства
-* Коллекции. Поддерживается только массив
+* Коллекции, отличные от массивов
 
-## Road Map
-* Новые анализаторы для избежания ошибок
-* Конфиг для настройки имен методов и свойств
+## Roadmap
+* Новые анализаторы для избегания ошибок
+* Конфиг для установки имен, методов и свойств
+* Sender в UnityHandler для возможности передачи самого объекта в качестве параметра
+* Добавление адаптеров для любой сущности с UnityEvent
+* 
+## На рассмотрение:
+* Аттрибуты для отрисовки Inspector  и EditorWindow
+* Адаптре для Odin Inspector, Tri Inspector и других для плавного переуключения между ними
+* Сериализация. Dictionary, tuple

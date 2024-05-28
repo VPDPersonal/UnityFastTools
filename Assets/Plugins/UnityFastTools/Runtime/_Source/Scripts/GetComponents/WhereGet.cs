@@ -2,22 +2,22 @@
 namespace UnityFastTools.GetComponents
 {
     /// <summary>
-    /// GetComponent method type.
-    /// Changes may prevent correct code generation.
-    /// If you want to edit WhereGet, you will also need to edit UnityFastToolsGenerators.
+    /// Specifies the method to use for GetComponent.
+    /// Modifications might prevent correct code generation.
+    /// If you want to modify WhereGet, you will also need to modify UnityFastToolsGenerators.
     /// </summary>
     public enum WhereGet
     {
         /// <summary>
-        /// GetComponent
+        /// Use GetComponent on the same GameObject.
         /// </summary>
         Self,
         /// <summary>
-        /// GetComponentInChildren
+        /// Use GetComponentInChildren to search in child GameObjects.
         /// </summary>
         Child,
         /// <summary>
-        /// GetComponentInParent
+        /// Use GetComponentInParent to search in parent GameObjects.
         /// </summary>
         Parent,
     }

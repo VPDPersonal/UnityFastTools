@@ -2,18 +2,18 @@
 namespace UnityFastTools.UnityEvents
 {
     /// <summary>
-    /// Event name UnityEvent.
-    /// Changes may prevent correct code generation.
-    /// If you want to edit UnityEventType you will also need to change UnityFastToolsGenerators.
+    /// Names of UnityEvents.
+    /// Modifications might prevent correct code generation.
+    /// If you want to modify UnityEventName, you will also need to modify UnityFastToolsGenerators.
     /// </summary>
     public enum UnityEventName
     {
         /// <summary>
-        /// onClick
+        /// onClick event
         /// </summary>
         Click,
         /// <summary>
-        /// onValueChanged
+        /// onValueChanged event
         /// </summary>
         ValueChanged,
     }
