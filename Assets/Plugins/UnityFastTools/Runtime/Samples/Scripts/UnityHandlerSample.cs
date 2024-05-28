@@ -45,26 +45,26 @@ namespace UnityFastTools.Samples
         
         #region Toggle Members
         // This approach works only for: Button, Toggle, Slider, RectScroll.
-        [UnityHandler(nameof(OnValueChanged1))]
-        [SerializeField] private Toggle _singleToggle1;
-        
-        [UnityHandler(UnityEventName.ValueChanged, nameof(OnValueChanged2))]
-        [SerializeField] private Toggle _singleToggle2;
+        // [UnityHandler(nameof(OnValueChanged1))]
+        // [SerializeField] private Toggle _singleToggle1;
+        //
+        // [UnityHandler(UnityEventName.ValueChanged, nameof(OnValueChanged2))]
+        // [SerializeField] private Toggle _singleToggle2;
         
         // This option can lead to errors in the generated code if there are mistakes in the parameters.
-        [UnityHandler("onValueChanged", nameof(OnValueChanged3))]
-        [SerializeField] private Toggle _singleToggle3;
+        // [UnityHandler("onValueChanged", nameof(OnValueChanged3))]
+        // [SerializeField] private Toggle _singleToggle3;
         
         [UnityHandler(nameof(OnValueChangedArray1))]
         [SerializeField] private Toggle[] _arrayToggle1;
         
         // field: Not supported.
         // [field: UnityHandler(nameof(OnValueChangedProperty1))]
-        [UnityHandler(nameof(OnValueChangedProperty1))]
-        [field: SerializeField] private Toggle PropertyToggle1 { get; set; }
-        
-        [UnityHandler(nameof(OnValueChangedProperty2))]
-        private Toggle PropertyToggle2 => PropertyToggle1;
+        // [UnityHandler(nameof(OnValueChangedProperty1))]
+        // [field: SerializeField] private Toggle PropertyToggle1 { get; set; }
+        //
+        // [UnityHandler(nameof(OnValueChangedProperty2))]
+        // private Toggle PropertyToggle2 => PropertyToggle1;
         
         // Not support
         // [UnityHandler(nameof(OnValueChangedProperty2))]

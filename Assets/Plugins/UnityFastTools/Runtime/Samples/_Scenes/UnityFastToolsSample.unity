@@ -616,11 +616,6 @@ GameObject:
   - component: {fileID: 301677133}
   - component: {fileID: 301677132}
   - component: {fileID: 301677136}
-  - component: {fileID: 301677141}
-  - component: {fileID: 301677140}
-  - component: {fileID: 301677139}
-  - component: {fileID: 301677138}
-  - component: {fileID: 301677137}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -738,133 +733,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &301677137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301677131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Content: {fileID: 0}
-  m_Horizontal: 1
-  m_Vertical: 1
-  m_MovementType: 1
-  m_Elasticity: 0.1
-  m_Inertia: 1
-  m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
-  m_Viewport: {fileID: 0}
-  m_HorizontalScrollbar: {fileID: 0}
-  m_VerticalScrollbar: {fileID: 0}
-  m_HorizontalScrollbarVisibility: 0
-  m_VerticalScrollbarVisibility: 0
-  m_HorizontalScrollbarSpacing: 0
-  m_VerticalScrollbarSpacing: 0
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &301677138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301677131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4398b59a6fe04bfca72ea79c3d87024c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &301677139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301677131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc6e1c87605b4d289d4c07cf4bde01f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &301677140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301677131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &301677141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301677131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c028e705f2994fcc87edf8b9480e1067, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _container1:
-    <Target>k__BackingField: {fileID: 301677138}
-  _container2:
-    <Target>k__BackingField: {fileID: 0}
-    _isUseParameter: 0
-    _parameter: 0
-  _containers1:
-  - <Target>k__BackingField: {fileID: 0}
-  - <Target>k__BackingField: {fileID: 0}
-  _containers2:
-  - <Target>k__BackingField: {fileID: 0}
-    _isUseParameter: 1
-    _parameter: 1
-  _containers3:
-  - <Target>k__BackingField: {fileID: 301677138}
-    _isUseParameter: 0
-    _parameter: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3171,14 +3039,19 @@ MonoBehaviour:
   _singleButton1: {fileID: 1518984288}
   _singleButton2: {fileID: 665587833}
   _singleButton3: {fileID: 2101157561}
-  <PropertyButton1>k__BackingField: {fileID: 1248030678}
-  _arrayButtons1:
+  _arrayButton1:
   - {fileID: 568224547}
   - {fileID: 1585233253}
   - {fileID: 1843427502}
   - {fileID: 1560375308}
   - {fileID: 2006432107}
   - {fileID: 1013613362}
+  <PropertyButton1>k__BackingField: {fileID: 1248030678}
+  _singleToggle1: {fileID: 0}
+  _singleToggle2: {fileID: 0}
+  _singleToggle3: {fileID: 0}
+  _arrayToggle1: []
+  <PropertyToggle1>k__BackingField: {fileID: 0}
 --- !u!1 &1843427500
 GameObject:
   m_ObjectHideFlags: 0
