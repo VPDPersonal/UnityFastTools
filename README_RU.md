@@ -67,6 +67,7 @@ public partial class SomeMono : MonoBehaviour
 **GetComponentAttribute** это атрибут, предназначенный для автоматического вызова метода GetComponent для полей и свойств.
 
 ```csharp
+// Класс должен иметь модификатор 'partial', в противном случае возникнет ошибка UTF0002
 public partial class SomeMono : MonoBehaviour
 {
     // Вызывает 'GetComponent' для '_image'.
@@ -103,6 +104,7 @@ public partial class SomeMono : MonoBehaviour
 которое инициализирует поле с помощью GetComponent
 
 ```csharp
+// Класс должен иметь модификатор 'partial', в противном случае возникнет ошибка UTF0002
 public partial class SomeMono : MonoBehaviour
 {
     // Создает свойство:

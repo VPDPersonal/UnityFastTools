@@ -66,6 +66,7 @@ Incorrect parameters in the attribute will result in errors in the generated cod
 **GetComponentAttribute** is an attribute designed to automatically call GetComponent for fields and properties.
 
 ```csharp
+// The class must have the 'partial' modifier, otherwise an error will occur UTF0002
 public partial class SomeMono : MonoBehaviour
 {
     // Calls 'GetComponent' on '_image'.
@@ -101,6 +102,7 @@ public partial class SomeMono : MonoBehaviour
 **GetComponentAttribute** is an attribute for fields that automatically creates a property initializing the field via GetComponent.
 
 ```csharp
+// The class must have the 'partial' modifier, otherwise an error will occur UTF0002
 public partial class SomeMono : MonoBehaviour
 {
     // Creates a property:
