@@ -26,11 +26,11 @@ public partial class SomeMono : MonoBehaviour
     // This method is more error-prone. If you have a typo in the parameters,
     // there will be a compilation error in the generated code.
     [UnityHandler("onClick", "OnClicked"]
-    [SerializeField] private Button _button2;
+    [SerializeField] private Button _button3;
     
     // Arrays are supported.
     [UnityHandler(nameof(OnClicked))]
-    [SerializeField] private Button _buttons;
+    [SerializeField] private Button[] _buttons;
 
     // You must call the the 'SubscribeUnityHandler' method
     // to subscribe to all necessary events.
