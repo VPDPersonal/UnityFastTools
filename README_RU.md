@@ -27,11 +27,11 @@ public partial class SomeMono : MonoBehaviour
     // Этот способ более подвержен ошибкам. Если вы допустите опечатку в параметрах,
     // возникнет ошибка компиляции в сгенерированном коде.
     [UnityHandler("onClick", "OnClicked"]
-    [SerializeField] private Button _button2;
+    [SerializeField] private Button _button3;
     
     // Поддерживаются массивы.
     [UnityHandler(UnityHandlerType.Click, nameof(OnClicked))]
-    [SerializeField] private Button _buttons;
+    [SerializeField] private Button[] _buttons;
 
     // Вы должны вызвать метод 'SubscribeUnityHandler'
     // для подписки на все необходимые события.
